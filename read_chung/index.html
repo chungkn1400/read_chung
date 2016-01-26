@@ -895,6 +895,7 @@ getlistlang();
 var langcombo="en",icombo=0;
 langcombo="auto";icombo=1;document.getElementById('combo').selectedIndex=icombo;
 langcombo="fr";icombo=2;document.getElementById('combo').selectedIndex=icombo;
+icombo=-1;
 function subcombo(){
 langcombo="en";
 icombo=document.getElementById('combo').selectedIndex;
@@ -959,8 +960,9 @@ if(localStorage){
    localStorage.setItem("read_chung_filename",filename);
    localStorage.setItem("read_chung_ifiletext",ifiletext);
 }}
+  if(icombo>=0){
    localStorage.setItem("read_chung_langcombo",langcombo);
-   localStorage.setItem("read_chung_icombo",icombo);
+   localStorage.setItem("read_chung_icombo",icombo);}
 }}
 subinit();
 </script>
