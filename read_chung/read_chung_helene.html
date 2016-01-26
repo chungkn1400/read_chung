@@ -471,17 +471,6 @@ text=replaceall(text,lf,".");
 text=replaceall(text,cr,".");
 text=replaceall(text,"'"," ");
 
-text=replaceall(text,",","@");
-text=replaceall(text,"@"," , ");
-text=replaceall(text,";","@");
-text=replaceall(text,"@"," ; ");
-text=replaceall(text,":","@");
-text=replaceall(text,"@"," : ");
-text=replaceall(text,".","@");
-text=replaceall(text,"@"," . ");
-text=replaceall(text,"!","@");
-text=replaceall(text,"@"," ! ");
-
 //text=replaceall(text,"("," ");
 //text=replaceall(text,")"," ");
 //text=replaceall(text,"?"," ");
@@ -498,6 +487,17 @@ text=replaceall(text,"ü","u");
 text=replaceall(text,"ä","a");
 text=replaceall(text,"â","a");
 //text=replaceall(text,"ç","c");
+
+text=replaceall(text,",","@");
+text=replaceall(text,"@"," , ");
+text=replaceall(text,";","@");
+text=replaceall(text,"@"," ; ");
+text=replaceall(text,":","@");
+text=replaceall(text,"@"," : ");
+text=replaceall(text,".","@");
+text=replaceall(text,"@"," . ");
+text=replaceall(text,"!","@");
+text=replaceall(text,"@"," ! ");
 for(var i=0;i<200;i++){text=replaceall(text,"  "," ");}
 return text.trim();
 }
