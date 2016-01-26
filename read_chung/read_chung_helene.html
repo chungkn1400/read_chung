@@ -558,7 +558,7 @@ tspeaktext=0;//ifiletext=0;jfiletext=0;
 if(ifiletext0>0 && ifiletext0<=filetext.length-8){ifiletext=ifiletext0;}
 ifiletext0=0;
 if(filename==filenameinit){if(ifiletextinit){ifiletext=ifiletextinit;}}
-audiotime1=0.5+gettimer()/1000;audiotime0=audiotime1-0.1;
+audiotime1=0.5+gettimer()/1000;audiotime0=audiotime1-0.01;
 saytxt();
 }
 function subprev(){
@@ -567,7 +567,7 @@ tspeaktext=0;ifiletext=Math.max(0,ifiletext-1000);
 if(ifiletext>1){
    for(var j=0;j<400;j++){if("?!.".indexOf(filetext.substr(ifiletext+j,1))>=0){ifiletext+=j;break;}}}
 jfiletext=ifiletext+7000;
-audiotime1=0.5+gettimer()/1000;audiotime0=audiotime1-0.1;
+audiotime1=0.5+gettimer()/1000;audiotime0=audiotime1-0.01;
 saytxt();
 }
 function subnext(){
@@ -576,7 +576,7 @@ tspeaktext=0;ifiletext=Math.min(filetext.length-1,ifiletext+1000);
 if(ifiletext<filetext.length-1){
    for(var j=0;j<400;j++){if("?!.".indexOf(filetext.substr(ifiletext-j,1))>=0){ifiletext-=j;break;}}}
 jfiletext=ifiletext+7000;
-audiotime1=0.5+gettimer()/1000;audiotime0=audiotime1-0.1;
+audiotime1=0.5+gettimer()/1000;audiotime0=audiotime1-0.01;
 saytxt();
 }
 function subPREV(){
@@ -601,7 +601,7 @@ if(ifiletext>1){
  ifiletext=Math.min(filetext.length-80,ifiletext+j0);
 }
 jfiletext=ifiletext+7000;
-audiotime1=0.5+gettimer()/1000;audiotime0=audiotime1-0.1;
+audiotime1=0.5+gettimer()/1000;audiotime0=audiotime1-0.01;
 saytxt();
 }
 function subNEXT(){
@@ -616,7 +616,7 @@ if(ifiletext<filetext.length-(j0+1) && test==0){
    for(var j=j0;j<Math.min(900000,j1);j++){if(filetext.substr(ifiletext+j,3)==lf+lf+lf){j0=j;test=1;break;}}}
 ifiletext=Math.min(filetext.length-80,ifiletext+j0);
 jfiletext=ifiletext+7000;
-audiotime1=0.5+gettimer()/1000;//audiotime0=audiotime1-0.1;
+audiotime1=0.5+gettimer()/1000;audiotime0=audiotime1-0.01;
 saytxt();
 }
 var ifiletext0=0,textspeakall0="";
@@ -631,7 +631,7 @@ ifiletext=Math.min(filetext.length-8,ifiletext0);
 ifiletext0=0;
 jfiletext=ifiletext+7000;
 if(textspeakall0==""){textspeakall0="   ";}
-audiotime1=0.5+gettimer()/1000;//audiotime0=audiotime1-0.1;
+audiotime1=0.5+gettimer()/1000;audiotime0=audiotime1-0.01;
 saytxt();
 tfocus=0;
 document.getElementById('pause').focus();
@@ -747,7 +747,7 @@ if((Timer>audiotime0) && (Timer<audiotime1+0.1) && (textspeak.length>0)){
   if ((i<(textspeak.length-1)) && (phoneme=="c")){if(textspeak.substr(i+1,1)=="h"){phoneme="ch";};};
 }else{phoneme=" ";
       if(dtpause>6){dtpause=6;}
-      if(textspeakall.length>1 && Timer>(audiotime1+0.1+dtpause*0.2) &&  //0.37//0.02
+      if(textspeakall.length>1 && Timer>(audiotime1+0.2+dtpause*0.2) &&  //0.37//0.02
 	     Timer>(audiotime0+0.1+dtpause*0.2)){ //0.02
 	     if(audiotime1<(Timer-0.01)){audiotime1=Timer-0.01;} //0.01
 	     if(audiotime0<(Timer-0.01)){audiotime0=Timer-0.01;} //0.01
