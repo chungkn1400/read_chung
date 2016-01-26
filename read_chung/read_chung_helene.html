@@ -1,8 +1,10 @@
-<!DOCTYPE HTML>
+ï»¿<!DOCTYPE HTML>
 <HTML>
  <HEAD>
-  <!--TITLE> JSC3D - Face3D - chatbot_chung_small </TITLE-->
-  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+  <TITLE> JSC3D - read_chung </TITLE>
+  <!--meta http-equiv="content-type" content="text/html; charset=ISO-8859-1"-->
+  <!--meta charset="ISO-8859-1"-->
+  <meta charset="utf-8">
  </HEAD>
 
  <BODY   onunload="close();"  >
@@ -474,19 +476,19 @@ text=replaceall(text,"'"," ");
 //text=replaceall(text,"("," ");
 //text=replaceall(text,")"," ");
 //text=replaceall(text,"?"," ");
-//text=replaceall(text,"é","e");
-//text=replaceall(text,"è","e");
-//text=replaceall(text,"ê","e");
-text=replaceall(text,"ë","é");
-text=replaceall(text,"î","i");
-text=replaceall(text,"ï","i");
-//text=replaceall(text,"ô","o");
-//text=replaceall(text,"ù","u");
-text=replaceall(text,"û","u");
-text=replaceall(text,"ü","u");
-text=replaceall(text,"ä","a");
-text=replaceall(text,"â","a");
-//text=replaceall(text,"ç","c");
+//text=replaceall(text,"Ã©","e");
+//text=replaceall(text,"Ã¨","e");
+//text=replaceall(text,"Ãª","e");
+text=replaceall(text,"Ã«","Ã©");
+text=replaceall(text,"Ã®","i");
+text=replaceall(text,"Ã¯","i");
+//text=replaceall(text,"Ã´","o");
+//text=replaceall(text,"Ã¹","u");
+text=replaceall(text,"Ã»","u");
+text=replaceall(text,"Ã¼","u");
+text=replaceall(text,"Ã¤","a");
+text=replaceall(text,"Ã¢","a");
+//text=replaceall(text,"Ã§","c");
 
 text=replaceall(text,",","@");
 text=replaceall(text,"@"," , ");
@@ -503,17 +505,17 @@ return text.trim();
 }
 function formatoutput(text0){
 var text=text0;//.toLowerCase();
-//text=replaceall(text,"é","e");
-//text=replaceall(text,"è","e");
-//text=replaceall(text,"ê","e");
-//text=replaceall(text,"ë","e");
-text=replaceall(text,"î","i");
-text=replaceall(text,"ô","o");
-text=replaceall(text,"ù","u");
-text=replaceall(text,"û","u");
-text=replaceall(text,"à","a");
-text=replaceall(text,"â","a");
-text=replaceall(text,"ç","c");
+//text=replaceall(text,"Ã©","e");
+//text=replaceall(text,"Ã¨","e");
+//text=replaceall(text,"Ãª","e");
+//text=replaceall(text,"Ã«","e");
+text=replaceall(text,"Ã®","i");
+text=replaceall(text,"Ã´","o");
+text=replaceall(text,"Ã¹","u");
+text=replaceall(text,"Ã»","u");
+text=replaceall(text,"Ã ","a");
+text=replaceall(text,"Ã¢","a");
+text=replaceall(text,"Ã§","c");
 return text.trim();
 }
 var intext0="";var vars=[];var icookie=0;
@@ -691,8 +693,8 @@ text="."+(intext);//eliza.transform(intext);
 var msg=text;//intext+crlf+text+crlf+crlf;
 if(lang!="en" && msg.indexOf(">")>1){
   msg=replaceall(msg,"> >",">");
-  msg=replaceall(msg,"> ",">§");
-  msg=replaceall(msg,">§",crlf+"> ");
+  msg=replaceall(msg,"> ",">Â§");
+  msg=replaceall(msg,">Â§",crlf+"> ");
 }
 //printmsg(">>"+intext0.substr(0,40)+crlf+msg);
 printmsg(">>"+pagemsg+crlf+msg);
