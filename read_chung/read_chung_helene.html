@@ -5,7 +5,7 @@
   <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
  </HEAD>
 
- <BODY   onmousemove="mousemove(event);" onunload="close();"  >
+ <BODY   onunload="close();"  >
 <!--a href="https://drive.google.com/?tab=wo&authuser=0#folders/0B6GM9ay7ImZLM0xQVjFWSkliS0U">https://drive.google.com/? open source chatbot_chung _________</a--> 
 <a href="http://translate.yandex.com/" target="_blank">"Powered by Yandex.Translate"</a>
 <a href="http://responsivevoice.org/" target="_blank"> & "responsivevoice"</a>
@@ -22,7 +22,7 @@
 	    <button id="quit"  onclick="subquit();" >quit</button>
 		</div>
 		<canvas id="cvmsg" style="position:absolute;top:550px;left:14px;border:none;" width="290" height="24" hidden></canvas>
-		<div style="left:0px; ">
+		<div style="left:0px; " onmousemove="mousemove(event);">
 		<!--button id="reset"  onclick="reset2();">reset</button-->
 		<input type="text" onmousedown="reset2();" id="intext" maxlength="35" size="30" value=""/>
 		<!--button id="say"  onclick="say();">say</button-->
@@ -619,7 +619,9 @@ saytxt();
 }
 var ifiletext0=0,textspeakall0="";
 function subpause(){
-if(tspeaktext==2){ifiletext0=ifiletext;textspeakall0=textspeakall;
+alert("pause");return;
+if(tspeaktext==2){
+                  ifiletext0=ifiletext;textspeakall0=textspeakall;
                   tspeaktext=0;audiotime1=0;audiotime0=0;alert("pause");}
 tspeaktext=0;
 if(filetext.length<=9){return;}
@@ -963,7 +965,9 @@ if(localStorage){
   if(icombo>=0){
    localStorage.setItem("read_chung_langcombo",langcombo);
    localStorage.setItem("read_chung_icombo",icombo);}
-}}
+}
+alert("saved !");
+}
 subinit();
 </script>
  </BODY>
