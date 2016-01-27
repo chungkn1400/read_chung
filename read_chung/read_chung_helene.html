@@ -755,7 +755,7 @@ if((Timer>audiotime0) && (Timer<audiotime1+0.1) && (textspeak.length>0)){
 }else{phoneme=" ";
       if(dtpause>6){dtpause=6;}
       if(textspeakall.length>1 && Timer>(audiotime1+0.2+dtpause*0.2) &&  //0.37//0.02
-	     Timer>(audiotime0+0.1+dtpause*0.2)){ //0.02
+	     Timer>(audiotime0+0.1+dtpause*0.2) && Timer>tspeaking){ //0.02
 	     if(audiotime1<(Timer-0.01)){audiotime1=Timer-0.01;} //0.01
 	     if(audiotime0<(Timer-0.01)){audiotime0=Timer-0.01;} //0.01
 		 speak();}
