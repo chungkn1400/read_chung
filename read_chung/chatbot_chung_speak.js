@@ -90,10 +90,11 @@ myjs.onload = function(){alert("ok");}
 document.getElementsByTagName('head')[0].appendChild(myjs);
 */
 var responserate=0.060,responsivemsg="",myresponsivevoice="";
+var tspeaking=0;
 function responsivespeak(msg){
 Timer=-1;
 responsivemsg=msg;
-tsay=1;audiotime1=8+gettimer()/1000.0;
+tsay=1;audiotime1=16+gettimer()/1000.0;
 var voicename="UK English Female";
 if(myresponsivevoice!=""){voicename=myresponsivevoice;}
 //responsiveVoice.speak(msg,voicename);
@@ -106,12 +107,15 @@ function startresponse(){
  tsay=0;
  if(Timer<0){ Timer=gettimer()/1000.0;
  audiotime0=Timer;
- audiotime1=Timer+responserate*responsivemsg.length;//textspeakall.length;
+ responserate=Math.max(0.02,Math.min(0.4,responserate));
+ audiotime1=Timer+Math.min(16,responserate*responsivemsg.length);//textspeakall.length;
+ tspeaking=audiotime1+2;
  if(responsivemsg.length>1){audiotime1-=0.1;}//0.05
  //alert(audiotime1-audiotime0);
 }}
 function endresponse(){
 audiotime1=gettimer()/1000.0;
+tspeaking=0;
 var rate=(audiotime1-audiotime0)/(1+responsivemsg.length);
 responserate+=(rate-responserate)*0.4;
 }

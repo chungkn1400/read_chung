@@ -4,7 +4,7 @@ read_chung  a program by NGUYEN.Chung (freeware 2016)
 double click on read_chung_helene.html and it will run !
 
 
-to install unzip the zip file in D:/read_chung/ folder
+to install unzip the zip file in D:/read_chung/ folder or any D:/read_chung2/ , 3, 4... as wanted
 
 to uninstall delete unzipped folder
 
