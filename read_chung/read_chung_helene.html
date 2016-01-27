@@ -732,7 +732,8 @@ audiotime1=Math.min(audiotime1,0.2+gettimer()/1000.0);
 //speak();
 if(tspeaktext==1){
         tspeaktext=2;
-        var Timer=gettimer()/1000.0;
+		if(tspeaking>1){jfiletext=ifiletext;textspeakall="";}
+        //var Timer=gettimer()/1000.0;
         // //if(Timer>audiotime1 && Timer>(3.1+ttranslate/1000)){say();}
         //if(Timer>audiotime0+1 && Timer>(3.1+ttranslate/1000)){say();}
 	}
@@ -761,7 +762,8 @@ if((Timer>audiotime0) && (Timer<audiotime1+0.1) && (textspeak.length>0)){
 		 speak();}
 	  else if(tspeaktext==2){
 	       if(Timer>(audiotime1+2) && jfiletext<filetext.length-1){
-		                  audiotime1=Timer;ifiletext=jfiletext;setTimeout("saytxt();",100);}
+		                  audiotime1=Timer;ifiletext=jfiletext;
+						  setTimeout("saytxt();",100);}
 		   else if(Timer>(audiotime1+3)){tspeaktext=0;ifiletext=0;jfiletext=7000;}}
 	  else if(Timer>(audiotime1+3)){tspeaktext=0;ifiletext=0;jfiletext=7000;}
 		 }
