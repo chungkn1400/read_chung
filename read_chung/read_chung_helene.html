@@ -68,7 +68,7 @@
 	<script type="text/javascript" src="helenemouth_obj.js"></script>
 	<script type="text/javascript" src="helenemoutho_obj.js"></script>
 	<script type="text/javascript" src="helenesmile_obj.js"></script>
-	<!--script type="text/javascript" src="helene_jpg.js"></script-->
+	<script type="text/javascript" src="helene_jpg.js"></script>
 	<!--script type="text/javascript" src="alexiabody2_obj.js"></script>
 	<script type="text/javascript" src="alexiabody2_jpg.js"></script-->
 	<script type="text/javascript" src="myjsc3d.js"></script>
@@ -82,7 +82,7 @@
 	var vbuff2=[];var vbuff3=[];var vbuff4=[];var nvbuff=0;
 	var myimage=new Image;
 	myimage.width=512;myimage.height=512;
-	myimage.src="helene.jpg";//helenejpg;
+	myimage.src=helenejpg;
 	/*var myimage2=new Image;
 	myimage2.width=512;myimage2.height=512;
 	myimage2.src=alexiabody2jpg;*/
@@ -99,6 +99,9 @@
 	         "top:0px;left:0px;width:350px;height:"+(Math.min(wx,wy)-4)+"px;");
         document.getElementById("divmsg").setAttribute("style",
 	         "position:absolute;top:"+(Math.min(wx,wy))+"px;left:"+(Math.min(wx,wy)+20)+"px;");
+        var object=document.getElementById('msg');
+	    object.style.font=" bold 13px arial,sans-serif"; 
+        //object.style.font = "italic small-caps bold 16px arial, sans-serif";
 		viewer = new JSC3D.Viewer(canvas);
 	    //viewer.setParameter('SceneUrl', '../demos/models/helene.obj');
 		viewer.setParameter('SceneUrl', '');
