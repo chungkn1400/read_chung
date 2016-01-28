@@ -565,6 +565,18 @@ tspeaktext=0;//ifiletext=0;jfiletext=0;
 if(ifiletext0>0 && ifiletext0<=filetext.length-8){ifiletext=ifiletext0;}
 ifiletext0=0;
 if(filename==filenameinit){if(ifiletextinit){ifiletext=ifiletextinit;}}
+else{
+     for(var i=0;i<=n10;i++){
+	    if(filenamei[i]==filename){ifiletext=ifiletexti[i];
+		   filenameinit=filenamei[i];
+		   ifiletextinit=ifiletexti[i];
+		   if(i>0){
+		    for(var j=i;j>0;j-=1){filenamei[j]=filenamei[j-1];
+		                         ifiletexti[j]=ifiletexti[j-1];}}
+		   filenamei[0]=filenameinit;
+		   ifiletexti[0]=ifiletextinit;
+		   break;}}
+}
 audiotime1=0.5+gettimer()/1000;audiotime0=audiotime1-0.01;
 saytxt();
 }
@@ -963,15 +975,35 @@ aux=localStorage.getItem("read_chung_langcombo");
 if(aux){langcombo=aux;}
 aux=localStorage.getItem("read_chung_icombo");
 if(aux){icombo=parseInt(aux);icomboinit=icombo;}
+for(var i=0;i<=n10;i++){
+   aux=localStorage.getItem("read_chung_filename"+i);
+   if(aux){filenamei[i]=aux;}
+   aux=localStorage.getItem("read_chung_ifiletext"+i);
+   if(aux){ifiletexti[i]=parseInt(aux);}
+	 }
 }}
+var filenamei=[],ifiletexti=[],n10=10;
+for(var i=0;i<=n10;i++){filenamei[i]="";
+                       ifiletexti[i]=0;}
 function subsave(){
 if(localStorage){
  if(filename){
   if(filename!=""){
+   if(filename!=filenamei[0]){if(filenamei[n10]!=""){if(!confirm("replace ?")){return;}}
+      for(var i=n10;i>0;i-=1){filenamei[i]=filenamei[i-1];
+	                         ifiletexti[i]=ifiletexti[i-1];}}
    filenameinit=filename;
    ifiletextinit=ifiletext;               
    localStorage.setItem("read_chung_filename",filename);
    localStorage.setItem("read_chung_ifiletext",ifiletext);
+   filenamei[0]=filename;
+   ifiletexti[0]=ifiletext;
+   for(var i=0;i<=n10;i++){
+     //if(filenamei[i]!=""){
+        localStorage.setItem("read_chung_filename"+i,filenamei[i]);
+        localStorage.setItem("read_chung_ifiletext"+i,ifiletexti[i]);
+	 //}
+   }
 }}
   if(icombo>=0){
    localStorage.setItem("read_chung_langcombo",langcombo);
