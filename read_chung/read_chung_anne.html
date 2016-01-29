@@ -68,7 +68,7 @@
 	<script type="text/javascript" src="anne4mouth_obj.js"></script>
 	<script type="text/javascript" src="anne4moutho_obj.js"></script>
 	<script type="text/javascript" src="anne4smile_obj.js"></script>
-	<!--script type="text/javascript" src="anne4_jpg.js"></script-->
+	<script type="text/javascript" src="anne4_jpg.js"></script>
 	<!--script type="text/javascript" src="alexiabody2_obj.js"></script>
 	<script type="text/javascript" src="alexiabody2_jpg.js"></script-->
 	<script type="text/javascript" src="myjsc3d.js"></script>
@@ -87,7 +87,8 @@
 	myimage2.width=512;myimage2.height=512;
 	myimage2.src=alexiabody2jpg;*/
 	function printmsg(txt){
-	   document.getElementById("msg").value=txt+crlf+auxtext;}
+	   var txt1=replaceall(txt,'§',crlf);
+	   document.getElementById("msg").value=txt1+crlf+auxtext;}
 	function init() {
 		canvas = document.getElementById('cv');
 		var wx= parseInt(window.innerWidth*0.98);
@@ -471,10 +472,12 @@ function replaceall(text0,str1,str2){
 	return text;   
 }
 function formatinput(text0){
-var text=replaceall(text0,'"',' ');//.toLowerCase();
-text=replaceall(text,lf,".");
-text=replaceall(text,cr,".");
-text=replaceall(text,"'"," ");
+var text=replaceall(text0,'"',"'");//.toLowerCase();
+text=replaceall(text,lf,"§");
+text=replaceall(text,cr,"§");
+text=replaceall(text,"§§§","§§");
+//text=replaceall(text,"'"," ");
+text=replaceall(text,"--"," - ");
 
 //text=replaceall(text,"("," ");
 //text=replaceall(text,")"," ");
@@ -507,7 +510,7 @@ text=replaceall(text,".","@");
 text=replaceall(text,"@"," . ");
 text=replaceall(text,"!","@");
 text=replaceall(text,"@"," ! ");
-for(var i=0;i<200;i++){text=replaceall(text,"  "," ");}
+text=replaceall(text,"  "," ");
 return text.trim();
 }
 function formatoutput(text0){
@@ -683,6 +686,18 @@ tspeaktext=1;
 nextsub="";
 pagemsg=parseInt(ifiletext/1000+1)+"/"+parseInt(filetext.length/1000+1);
 jfiletext=ifiletext+1000;jfiletext=Math.min(jfiletext,filetext.length);
+var filetextaux=filetext.substr(ifiletext,jfiletext-ifiletext);
+var spaces='§            ';
+filetextaux=replaceall(filetextaux,lf,'§');
+filetextaux=replaceall(filetextaux,cr,'§');
+filetextaux=replaceall(filetextaux,'§§','§');
+filetextaux=replaceall(filetextaux,'§',lf);
+filetextaux=replaceall(filetextaux,lf,spaces);
+for(var j=jfiletext-2;j>ifiletext+10;j-=1){if("§!?.".indexOf(filetextaux.substr(j-ifiletext,1))>=0){jfiletext=j+1;break;}}
+filetextaux=filetextaux.substr(0,jfiletext-ifiletext);
+filetextaux=replaceall(filetextaux,spaces,lf);
+jfiletext=ifiletext+Math.max(10,filetextaux.length);
+jfiletext=Math.min(jfiletext,filetext.length);
 for(var j=jfiletext-2;j>ifiletext+10;j-=1){if("!?.".indexOf(filetext.substr(j,1))>=0){jfiletext=j+1;break;}}
 var intext=filetext.substr(ifiletext,jfiletext-ifiletext);
 intext=formatinput(intext).substr(0,6900);
@@ -780,12 +795,12 @@ if((Timer>audiotime0) && (Timer<audiotime1+0.1) && (textspeak.length>0)){
 	     if(audiotime1<(Timer-0.01)){audiotime1=Timer-0.01;} //0.01
 	     if(audiotime0<(Timer-0.01)){audiotime0=Timer-0.01;} //0.01
 		 speak();}
-	  else if(tspeaktext==2){
+	  else if(tspeaktext==2 && Timer>tspeaking){
 	       if(Timer>(audiotime1+2) && jfiletext<filetext.length-1){
 		                  audiotime1=Timer;ifiletext=jfiletext;
 						  setTimeout("saytxt();",100);}
 		   else if(Timer>(audiotime1+3)){tspeaktext=0;ifiletext=0;jfiletext=7000;}}
-	  else if(Timer>(audiotime1+3)){tspeaktext=0;ifiletext=0;jfiletext=7000;}
+	  else if(Timer>(audiotime1+3) && Timer>tspeaking){tspeaktext=0;ifiletext=0;jfiletext=7000;}
 		 }
 }
 function mykeypress(e) {
