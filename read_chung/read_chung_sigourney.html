@@ -638,9 +638,16 @@ jfiletext=ifiletext+7000;
 audiotime1=0.5+gettimer()/1000;audiotime0=audiotime1-0.01;
 saytxt();
 }
-var ifiletext0=0,textspeakall0="";
+function sleep(ms){
+var t=gettimer()+Math.min(10000,ms);
+while(gettimer()<t){}
+}
+var ifiletext0=0,textspeakall0="",tpause=0,outmsg="";
 function subpause(){
-alert("pause");return;
+//alert("pause");return;
+if(tpause==1){printmsg(">>"+crlf+"."+outmsg);sleep(300);tpause=0;return;}
+printmsg(">>"+crlf+"."+outmsg+crlf+crlf+">>PAUSE");
+tpause=1;sleep(300);return;
 if(tspeaktext==2){
                   ifiletext0=ifiletext;textspeakall0=textspeakall;
                   tspeaktext=0;audiotime1=0;audiotime0=0;alert("pause");}
@@ -718,7 +725,7 @@ if(lang!="en" && msg.indexOf(">")>1){
 //printmsg(">>"+intext0.substr(0,40)+crlf+msg);
 printmsg(">>"+pagemsg+crlf+msg);
 pagemsg="";
-var outmsg=msg.substr(msg.indexOf(">")+2,6999);
+outmsg=msg.substr(msg.indexOf(">")+2,6999);
 var patt=msg.substr(0,msg.indexOf(">"));
 if(outmsg.length<0.65*patt.length){
 		outmsg=patt+" "+outmsg; 
@@ -759,6 +766,7 @@ function subquit(){
    document.location.href="http://chung.blogvie.com/links/";//https://www.google.fr/search?q=nguyen+chung&ie=utf-8&oe=utf-8";
 }
 function testspeak(){
+if(tpause==1){return;}
 var Timer=gettimer()/1000.0;
 if((Timer>audiotime0) && (Timer<audiotime1+0.1) && (textspeak.length>0)){
   var i=parseInt(textspeak.length*(Timer-audiotime0)/(audiotime1-audiotime0+0.1));//0.01
