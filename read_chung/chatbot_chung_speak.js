@@ -1,4 +1,4 @@
-// chatbot_chung_speak a program by NGUYEN.Chung (freeware 2015)
+﻿// chatbot_chung_speak a program by NGUYEN.Chung (freeware 2015)
 var paudio=[],iaudio=0;
 var Timer=-1,ttslang0="",dtpause=0;
 function speak(){
@@ -10,7 +10,7 @@ if(textspeakall.length>95){
    var i=95,test=0,jj=0;
    for(var j=1;j<95;j++){if("§"==textspeakall.substr(j,1)){
 	                        i=j;test=1;dtpause=1;
-							textspeakall=textspeakall.substr(0,i-1)+";"+textspeakall.substr(i,textspeakall.length-i);
+							textspeakall=textspeakall.substr(0,i)+"."+textspeakall.substr(i+1,textspeakall.length-i-1);
                             break;}}
    if(test==0){
 	   for(var j=1;j<95;j++){c=textspeakall.substr(j,1);
@@ -28,7 +28,7 @@ if(textspeakall.length>95){
    if(test==0){textspeak=textspeakall.substr(0,i);}
    else{textspeak=textspeakall.substr(0,i);i+=1;}
    textspeakall=textspeakall.substr(i,textspeakall.length-i);
-   if(textspeak.length>5 || textspeakall.length<1){break;}
+   if(textspeak.length>1 || textspeakall.length<1){break;}
   }
 }else{textspeak=textspeakall;textspeakall="";}
 textspeak=textspeak.toLowerCase();
