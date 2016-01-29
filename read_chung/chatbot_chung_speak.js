@@ -8,12 +8,18 @@ if(textspeakall.length>95){
   for(var p=0;p<40;p++){
    dtpause=0;
    var i=95,test=0,jj=0;
-   for(var j=1;j<95;j++){c=textspeakall.substr(j,1);
+   for(var j=1;j<95;j++){if("§"==textspeakall.substr(j,1)){
+	                        i=j;test=1;dtpause=1;
+							textspeakall=textspeakall.substr(0,i-1)+";"+textspeakall.substr(i,textspeakall.length-i);
+                            break;}}
+   if(test==0){
+	   for(var j=1;j<95;j++){c=textspeakall.substr(j,1);
                          if(cc.indexOf(c)>=0){
 							i=j;test=1;
 							if(c==","){dtpause=1;}else{dtpause=2;}
 							if(c0!="," && c!="," && j<jj+4){dtpause=8;break;}
 							jj=j;c0=c;}}
+	}
    if(test==0){
     for(var j=0;j<40;j++){
        if(textspeakall.substr(i-j,1)==" "){break;};}	   

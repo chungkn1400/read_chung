@@ -13,7 +13,7 @@ to uninstall delete unzipped folder
 
 reads txt file with speaking avatar
 
-to read epub books, convert them online into .txt files
+to read epub books, convert them online into .txt files (utf-8)
 
 
 uses HTML5 , jsc3D , javascript
