@@ -687,21 +687,27 @@ nextsub="";
 pagemsg=parseInt(ifiletext/1000+1)+"/"+parseInt(filetext.length/1000+1);
 jfiletext=ifiletext+1000;jfiletext=Math.min(jfiletext,filetext.length);
 var filetextaux=filetext.substr(ifiletext,jfiletext-ifiletext);
-var spaces='§            ';
+var spaces= '§                        ';
+var spaces2='§                                                 ';
 filetextaux=replaceall(filetextaux,lf,'§');
 filetextaux=replaceall(filetextaux,cr,'§');
 filetextaux=replaceall(filetextaux,'§§','§');
 filetextaux=replaceall(filetextaux,'§',lf);
+filetextaux=replaceall(filetextaux,"  "," ");
+filetextaux=replaceall(filetextaux,lf+lf,spaces+spaces2);
 filetextaux=replaceall(filetextaux,lf,spaces);
 for(var j=jfiletext-2;j>ifiletext+10;j-=1){if("§!?.".indexOf(filetextaux.substr(j-ifiletext,1))>=0){jfiletext=j+1;break;}}
 filetextaux=filetextaux.substr(0,jfiletext-ifiletext);
+filetextaux=replaceall(filetextaux,spaces2,lf);
 filetextaux=replaceall(filetextaux,spaces,lf);
+filetextaux=replaceall(filetextaux,"  "," ");
 jfiletext=ifiletext+Math.max(10,filetextaux.length);
 jfiletext=Math.min(jfiletext,filetext.length);
 for(var j=jfiletext-2;j>ifiletext+10;j-=1){if("!?.".indexOf(filetext.substr(j,1))>=0){jfiletext=j+1;break;}}
 var intext=filetext.substr(ifiletext,jfiletext-ifiletext);
 intext=formatinput(intext).substr(0,6900);
 intext=replaceall(intext,"&"," ");
+intext=replaceall(intext,"***","* ");
 var intext2=intext.substr(jfiletext-40,40);
 if(intext==""){intext=" ";}
 //nextsub='say1("'+intext+'");';
