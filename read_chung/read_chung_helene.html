@@ -68,7 +68,7 @@
 	<script type="text/javascript" src="helenemouth_obj.js"></script>
 	<script type="text/javascript" src="helenemoutho_obj.js"></script>
 	<script type="text/javascript" src="helenesmile_obj.js"></script>
-	<script type="text/javascript" src="helene_jpg.js"></script>
+	<!--script type="text/javascript" src="helene_jpg.js"></script-->
 	<!--script type="text/javascript" src="alexiabody2_obj.js"></script>
 	<script type="text/javascript" src="alexiabody2_jpg.js"></script-->
 	<script type="text/javascript" src="myjsc3d.js"></script>
@@ -82,7 +82,7 @@
 	var vbuff2=[];var vbuff3=[];var vbuff4=[];var nvbuff=0;
 	var myimage=new Image;
 	myimage.width=512;myimage.height=512;
-	myimage.src=helenejpg;
+	myimage.src="helene.jpg";
 	/*var myimage2=new Image;
 	myimage2.width=512;myimage2.height=512;
 	myimage2.src=alexiabody2jpg;*/
@@ -273,6 +273,8 @@
 		var msg="enter a text"+crlf+crlf+crlf+"enter => repeat"+crlf+crlf;
 		msg+="page number => jump to page"+crlf+crlf;
 		msg+="up/down arrows => prev/next page"+crlf+crlf;
+		msg+="f/find keyword => find keyword"+crlf+crlf;
+		msg+="rf/rfind keyword => reverse find keyword"+crlf+crlf;
 		printmsg(msg);
 		setTimeout("loop();",50);
 }
@@ -540,6 +542,68 @@ if(parseInt(intext)>0 && filetext.length>=9){
    setTimeout('subsuite();',30);
    document.getElementById('intext').value="";
    return;}
+if(intext.substr(0,2).toLowerCase()=="f " && filetext.length>=9){
+   var keyword=intext.substr(2,99).toLowerCase();
+   var i=filetext.substr(ifiletext+1,filetext.length).toLowerCase().indexOf(keyword);
+   if(i>=0){i+=ifiletext+1;}
+   else{i=filetext.substr(0,ifiletext).toLowerCase().indexOf(keyword);}
+   if(i>=0){
+    ifiletext=Math.max(0,Math.min(filetext.length-8,i));}
+   else{alert("not found !");
+        document.getElementById('intext').value="";
+       }
+   setTimeout('subsuite();',30);
+   //document.getElementById('intext').value="";
+   return;
+   }	
+if(intext.substr(0,5).toLowerCase()=="find " && filetext.length>=9){
+   var keyword=intext.substr(5,99).toLowerCase();
+   var i=filetext.substr(ifiletext+1,filetext.length).toLowerCase().indexOf(keyword);
+   if(i>=0){i+=ifiletext+1;}
+   else{i=filetext.substr(0,ifiletext).toLowerCase().indexOf(keyword);}
+   if(i>=0){
+    ifiletext=Math.max(0,Math.min(filetext.length-8,i));}
+   else{alert("not found !");
+        document.getElementById('intext').value="";
+       }
+   setTimeout('subsuite();',30);
+   //document.getElementById('intext').value="";
+   return;
+   }	
+if(intext.substr(0,3).toLowerCase()=="rf " && filetext.length>=9){
+   var keyword=intext.substr(3,99).toLowerCase();
+   var i=ifiletext-1,ii=-1;n=keyword.length;
+   for(var j=i;j>=0;j-=1){if(filetext.substr(j,n).toLowerCase()==keyword){i=j;ii=j;break;}};
+   if(ii>=0){i+=0;}
+   else{i=filetext.length-2;ii=-1;
+        for(var j=i;j>ifiletext;j-=1){if(filetext.substr(j,n).toLowerCase()==keyword){i=j;ii=j;break;}}
+		}
+   if(ii>=0){
+    ifiletext=Math.max(0,Math.min(filetext.length-8,i));}
+   else{alert("not found !");
+        document.getElementById('intext').value="";
+       }
+   setTimeout('subsuite();',30);
+   //document.getElementById('intext').value="";
+   return;
+   }	
+if(intext.substr(0,6).toLowerCase()=="rfind " && filetext.length>=9){
+   var keyword=intext.substr(6,99).toLowerCase();
+   var i=ifiletext-1,ii=-1;n=keyword.length;
+   for(var j=i;j>=0;j-=1){if(filetext.substr(j,n).toLowerCase()==keyword){i=j;ii=j;break;}};
+   if(ii>=0){i+=0;}
+   else{i=filetext.length-2;ii=-1;
+        for(var j=i;j>ifiletext;j-=1){if(filetext.substr(j,n).toLowerCase()==keyword){i=j;ii=j;break;}}
+		}
+   if(ii>=0){
+    ifiletext=Math.max(0,Math.min(filetext.length-8,i));}
+   else{alert("not found !");
+        document.getElementById('intext').value="";
+       }
+   setTimeout('subsuite();',30);
+   //document.getElementById('intext').value="";
+   return;
+   }	
 tspeaktext=0;audiotime1=audiotime0;//ifiletext=0;jfiletext=0;
 intext=formatinput(intext);
 var intext2=intext.trim(),txt2="";
@@ -594,7 +658,8 @@ saytxt();
 }
 function subnext(){
 if(tspeaktext!=2){return;}
-tspeaktext=0;ifiletext=Math.min(filetext.length-1,ifiletext+1000);
+tspeaktext=0;ifiletext=Math.min(ifiletext+1000,jfiletext);
+ifiletext=Math.min(filetext.length-1,ifiletext);
 if(ifiletext<filetext.length-1){
    for(var j=0;j<400;j++){if("?!.".indexOf(filetext.substr(ifiletext-j,1))>=0){ifiletext-=j;break;}}}
 jfiletext=ifiletext+7000;
@@ -604,7 +669,7 @@ saytxt();
 function subPREV(){
 if(tspeaktext!=2){return;}
 tspeaktext=0;
-var j0=200,j1=ifiletext,test=0;
+var j0=100,j1=ifiletext,test=0;
 if(ifiletext>j0+1){
    for(var j=j0;j<Math.min(900000,j1);j++){if(filetext.substr(ifiletext-j,6)==crlf+crlf+crlf){j0=j;test=1;break;}}}
 if(ifiletext>j0+1 && test==0){
@@ -629,7 +694,7 @@ saytxt();
 function subNEXT(){
 if(tspeaktext!=2){return;}
 tspeaktext=0;
-var j0=200,j1=filetext.length-ifiletext,test=0;
+var j0=100,j1=filetext.length-ifiletext,test=0;
 if(ifiletext<filetext.length-(j0+1)){
    for(var j=j0;j<Math.min(900000,j1);j++){if(filetext.substr(ifiletext+j,6)==crlf+crlf+crlf){j0=j;test=1;break;}}}
 if(ifiletext<filetext.length-(j0+1) && test==0){
@@ -648,8 +713,9 @@ while(gettimer()<t){}
 var ifiletext0=0,textspeakall0="",tpause=0,outmsg="";
 function subpause(){
 //alert("pause");return;
-if(tpause==1){printmsg(">>"+crlf+"."+outmsg);sleep(300);tpause=0;return;}
-printmsg(">>"+crlf+"."+outmsg+crlf+crlf+">>PAUSE");
+pagemsg=parseInt(ifiletext/1000+1)+"/"+parseInt(filetext.length/1000+1);
+if(tpause==1){printmsg(">>"+pagemsg+crlf+"."+outmsg);sleep(300);tpause=0;return;}
+printmsg(">>"+pagemsg+crlf+"."+outmsg+crlf+crlf+">>PAUSE");
 tpause=1;sleep(300);return;
 if(tspeaktext==2){
                   ifiletext0=ifiletext;textspeakall0=textspeakall;
