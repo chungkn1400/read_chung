@@ -272,7 +272,7 @@
 		//initelizabot();
 		var msg="enter a text"+crlf+crlf+crlf+"enter => repeat"+crlf+crlf;
 		msg+="page number => jump to page"+crlf+crlf;
-		msg+="up/down arrows => prev/next page"+crlf+crlf;
+		msg+="up/down arrows => prev/next page"+crlf+crlf+crlf+crlf;
 		msg+="f/find keyword => find keyword"+crlf+crlf;
 		msg+="rf/rfind keyword => reverse find keyword"+crlf+crlf;
 		printmsg(msg);
@@ -709,7 +709,7 @@ audiotime1=0.5+gettimer()/1000;audiotime0=audiotime1-0.01;
 saytxt();
 }
 function subPREV(){
-if(tspeaktext!=2){return;}
+if(tspeaktext!=2 && tspeaktext!=0){return;}
 tspeaktext=0;
 var j0=100,j1=ifiletext,test=0;
 if(ifiletext>j0+1){
@@ -734,7 +734,7 @@ audiotime1=0.5+gettimer()/1000;audiotime0=audiotime1-0.01;
 saytxt();
 }
 function subNEXT(){
-if(tspeaktext!=2){return;}
+if(tspeaktext!=2 && tspeaktext!=0){return;}
 tspeaktext=0;
 var j0=100,j1=filetext.length-ifiletext,test=0;
 if(ifiletext<filetext.length-(j0+1)){
