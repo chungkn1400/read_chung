@@ -515,6 +515,48 @@ text=replaceall(text,"@"," ! ");
 text=replaceall(text,"  "," ");
 return text.trim();
 }
+function formatoutput00(text0){
+var text=replaceall(text0,'"',"'");//.toLowerCase();
+text=replaceall(text,lf,"§");
+text=replaceall(text,cr,"§");
+text=replaceall(text,"§§§","§§");
+//text=replaceall(text,"'"," ");
+text=replaceall(text,"--"," - ");
+
+//text=replaceall(text,"("," ");
+//text=replaceall(text,")"," ");
+//text=replaceall(text,"?"," ");
+//text=replaceall(text,"é","e");
+//text=replaceall(text,"è","e");
+//text=replaceall(text,"ê","e");
+/*text=replaceall(text,"ë","é");
+text=replaceall(text,"î","i");
+text=replaceall(text,"ï","i");
+text=replaceall(text,"ö","o");
+text=replaceall(text,"ó","o");
+text=replaceall(text,"û","u");
+text=replaceall(text,"ü","u");
+text=replaceall(text,"ä","a");
+text=replaceall(text,"â","a");
+text=replaceall(text,"à","a");
+text=replaceall(text,"ì","i");
+text=replaceall(text,"ò","o");
+text=replaceall(text,"ù","u");
+//text=replaceall(text,"ç","c");
+*/
+text=replaceall(text,",","@");
+text=replaceall(text,"@"," , ");
+text=replaceall(text,";","@");
+text=replaceall(text,"@"," ; ");
+text=replaceall(text,":","@");
+text=replaceall(text,"@"," : ");
+text=replaceall(text,".","@");
+text=replaceall(text,"@"," . ");
+text=replaceall(text,"!","@");
+text=replaceall(text,"@"," ! ");
+text=replaceall(text,"  "," ");
+return text.trim();
+}
 function formatoutput(text0){
 var text=text0;//.toLowerCase();
 //text=replaceall(text,"é","e");
@@ -743,7 +785,7 @@ jfiletext=ifiletext+7000;
 audiotime1=0.5+gettimer()/1000;//audiotime0=audiotime1-0.1;
 saytxt();
 }
-var pagemsg="";
+var pagemsg="",intext00="";
 function saytxt(){
 //alert("/"+formateval("okeval(elizawords.length) eval(v['y'];v['y']+=1)")+"/");
 //icookie+=1;if(icookie>11){icookie=0;savecookie();}
@@ -771,6 +813,7 @@ jfiletext=ifiletext+Math.max(10,filetextaux.length);
 jfiletext=Math.min(jfiletext,filetext.length);
 for(var j=jfiletext-2;j>ifiletext+10;j-=1){if("!?.".indexOf(filetext.substr(j,1))>=0){jfiletext=j+1;break;}}
 var intext=filetext.substr(ifiletext,jfiletext-ifiletext);
+intext00=intext;
 intext=formatinput(intext).substr(0,6900);
 intext=replaceall(intext,"&"," ");
 intext=replaceall(intext,"***","* ");
@@ -795,6 +838,8 @@ if(intext=="*"){intext=oldmsg;}
 //alert("intext:"+intext);
 text="";
 text="."+(intext);//eliza.transform(intext);
+var text00="";
+if(tspeaktext>0){text00="."+formatoutput00(intext00);}
 //nextsub="say3(translatext);";
 //translate(text,"en",lang);
 //alert(text);
@@ -809,8 +854,15 @@ if(lang!="en" && msg.indexOf(">")>1){
   msg=replaceall(msg,"> ",">§");
   msg=replaceall(msg,">§",crlf+"> ");
 }
+var msg00=text00;//intext+crlf+text+crlf+crlf;
+if(lang!="en" && msg00.indexOf(">")>1){
+  msg00=replaceall(msg00,"> >",">");
+  msg00=replaceall(msg00,"> ",">§");
+  msg00=replaceall(msg00,">§",crlf+"> ");
+}
 //printmsg(">>"+intext0.substr(0,40)+crlf+msg);
-printmsg(">>"+pagemsg+crlf+msg);
+if(tspeaktext==0){printmsg(">>"+pagemsg+crlf+msg);}
+else{printmsg(">>"+pagemsg+crlf+msg00);}
 pagemsg="";
 outmsg=msg.substr(msg.indexOf(">")+2,6999);
 var patt=msg.substr(0,msg.indexOf(">"));
