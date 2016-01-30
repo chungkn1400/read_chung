@@ -33,9 +33,9 @@ if(textspeakall.length>95){
 }else{textspeak=textspeakall;textspeakall="";}
 textspeak=textspeak.toLowerCase();
 //auxvar=(window.speechSynthesis)+"/tsay="+tsay;
-if (('speechSynthesis' in window)&&(tsay==1)){
+/*if (('speechSynthesis' in window)&&(tsay==1)){
    speakhtml();if(tsay==1){return;};
-}
+}*/
 tsay=0;
 var ttslang=lang;
 //alert(textspeak);
