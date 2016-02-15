@@ -26,7 +26,7 @@
 		<canvas id="cvmsg" style="position:absolute;top:550px;left:14px;border:none;" width="290" height="24" hidden></canvas>
 		<div style="left:0px; " onmousemove="mousemove(event);">
 		<!--button id="reset"  onclick="reset2();">reset</button-->
-		<input type="text" onmousedown="reset2();" id="intext" maxlength="35" size="30" value=""/>
+		<input type="text" onmousedown="reset2();" id="intext" maxlength="25" size="20" value=""/>
 		<!--button id="say"  onclick="say();">say</button-->
     <select id="combo" onChange="subcombo();" onblur="tfocus=1;" onfocus="tfocus=0;">
        <option id="en">english</option>
@@ -36,6 +36,7 @@
        <option id="it">italian</option>
        <option id="es">spanish</option>
     </select>
+	<button id="selectansi"  onclick="subimportansi();">select txt ansi</button>
 	<button id="select"  onclick="subimport();">select txt file</button>
     <input type="file" id="files" name="files[]" accept=".txt" />
 	    <button id="save"  onclick="subsave();">save</button>
@@ -1088,10 +1089,19 @@ if(langcombo0!=langcombo && tspeaktext==2){ifiletext0=ifiletext;setTimeout('sayt
 	
   </script>
 <script type="text/javascript">
+var importformat="utf8";
 function subimport(){
 if (window.File && window.FileReader && window.FileList && window.Blob) {
   // Great success! All the File APIs are supported.
 }else{alert('The File APIs are not fully supported in this browser.');return;}
+importformat="utf8";
+document.getElementById('files').click();
+}
+function subimportansi(){
+if (window.File && window.FileReader && window.FileList && window.Blob) {
+  // Great success! All the File APIs are supported.
+}else{alert('The File APIs are not fully supported in this browser.');return;}
+importformat="ansi";
 document.getElementById('files').click();
 }
 var filename="",filetext="";
@@ -1107,7 +1117,9 @@ function handleFileSelect(evt) {
         filetext=(e.target.result);
 		setTimeout('saytxt0();',100);
       });
-    reader.readAsText(files[0],'utf-8');
+    if(importformat=="utf8"){reader.readAsText(files[0],'utf-8');}
+    else{reader.readAsText(files[0], "windows-1252");}
+	importformat="utf8";
     //reader.readAsText(files[0], 'ISO-8859-1');
 }
 document.getElementById('files').addEventListener('change', handleFileSelect, true);
