@@ -719,6 +719,7 @@ if(ifiletext>j0+1 && test==0){
    for(var j=j0;j<Math.min(900000,j1);j++){if(filetext.substr(ifiletext-j,3)==cr+cr+cr){j0=j;test=1;break;}}}
 if(ifiletext>j0+1 && test==0){
    for(var j=j0;j<Math.min(900000,j1);j++){if(filetext.substr(ifiletext-j,3)==lf+lf+lf){j0=j;test=1;break;}}}
+if(test==0){j0=10000;}
 ifiletext=Math.max(0,ifiletext-j0-300);
 if(ifiletext>1){
  var j0=8,j1=300,test=0;
@@ -744,6 +745,7 @@ if(ifiletext<filetext.length-(j0+1) && test==0){
    for(var j=j0;j<Math.min(900000,j1);j++){if(filetext.substr(ifiletext+j,3)==cr+cr+cr){j0=j;test=1;break;}}}
 if(ifiletext<filetext.length-(j0+1) && test==0){
    for(var j=j0;j<Math.min(900000,j1);j++){if(filetext.substr(ifiletext+j,3)==lf+lf+lf){j0=j;test=1;break;}}}
+if(test==0){j0=10000;}
 ifiletext=Math.min(filetext.length-80,ifiletext+j0);
 jfiletext=ifiletext+7000;
 audiotime1=0.5+gettimer()/1000;audiotime0=audiotime1-0.01;
