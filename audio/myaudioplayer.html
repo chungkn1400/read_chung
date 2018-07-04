@@ -38,6 +38,8 @@
       <option>0.99</option>
       <option>1.00</option>
   </select-->
+  <br />
+  <button id="link"  onclick="sublink();">link</button>
   <!--button id="save"  onclick="subcookie();">save</button-->
 <script type="text/javascript">
 var auxvar=null;
@@ -89,6 +91,11 @@ icombo=document.getElementById('combo').selectedIndex;
   setTimeout("document.location.search=searchtxt;",500); 
   //document.location.href=url;
 }
+function sublink(){
+  myaudio.pause();
+  setsearchtxt();
+  setTimeout("document.location.search=searchtxt;",500); 
+}
 function subcomborepeat(){
 var i=document.getElementById('comborepeat').selectedIndex;
 repeat=i;
@@ -117,8 +124,8 @@ if(myaudio.ended){
      if(icombo>=icombomax){icombo=0;};
      document.getElementById('combo').selectedIndex=icombo;
 	 tclose=1;subcombo();}
-  if(repeat==2){icombo=parseInt(Math.random()*icombomax);
-     if(icombo>=icombomax){icombo=0;};
+  if(repeat==2){icombo=Math.floor(Math.random()*icombomax);
+	 if(icombo>=icombomax){icombo=0;};
      document.getElementById('combo').selectedIndex=icombo;
 	 tclose=1;subcombo();}
 }
