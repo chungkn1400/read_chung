@@ -14,7 +14,7 @@
   <br />
   <select id="combo" onChange="subcombo();" onblur="tfocus=1;" onfocus="tfocus=0;;" style="width: 289px; height: 28px;">
       <option >lastedit03072018.mp3</option>
-      <option >lastedit03072018.mp3</option>
+      <option >lastedit04072018.mp3</option>
       <!--option >silence_before_storm.mp3</option>
       <option >yunas_determination.mp3</option>
       <option >rikku.mp3</option-->
@@ -25,6 +25,19 @@
       <option id="repeat all">repeat all</option>
       <option id="repeat rnd">repeat rnd</option>
   </select>
+  <!--select id="combospeed" onChange="subcombospeed();" onblur="tfocus=1;" onfocus="tfocus=0;" style="width: 49px; height: 28px;">
+      <option>0.90</option>
+      <option>0.91</option>
+      <option>0.92</option>
+      <option>0.93</option>
+      <option>0.94</option>
+      <option>0.95</option>
+      <option>0.96</option>
+      <option>0.97</option>
+      <option>0.98</option>
+      <option>0.99</option>
+      <option>1.00</option>
+  </select-->
   <!--button id="save"  onclick="subcookie();">save</button-->
 <script type="text/javascript">
 var auxvar=null;
@@ -55,6 +68,8 @@ if(hash.length>0){
    combotext=document.getElementById('combo')[icombo].value;
    myaudio.src=folder+combotext;}*/
 speed=1.0;
+//alert(speed);
+//document.getElementById('combospeed').selectedIndex=Math.floor((speed-0.90)/0.01+0.01);
 myaudio.playbackRate=speed;
 myaudio.load();
 function submsg(text){
@@ -79,6 +94,12 @@ var i=document.getElementById('comborepeat').selectedIndex;
 repeat=i;
 if(repeat==0){myaudio.loop=true;}
 else{myaudio.loop=false;}
+savecookie();
+}
+function subcombospeed(){
+var i=document.getElementById('combospeed').selectedIndex;
+speed=0.90+i*0.01;
+myaudio.playbackRate=speed;
 savecookie();
 }
 function mysub(){
