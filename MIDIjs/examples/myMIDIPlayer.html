@@ -251,12 +251,13 @@ for(var i=0;i<=50;i++){
 			//time2.innerHTML = "-" + timeFormatting(end - now);
 		});
 	};
-	var tnextsong=0,now0=0;
+	var tnextsong=0,now0=0,nloop=0;
 	function mytestnextsong(){
 	  if(tnextsong==0){tnextsong=1;setTimeout("mynextsong();",1000);}
 	};
     function mynextsong(){	
 	    var id = ++songid % song.length;
+		if(id==0){nloop=nloop+1;if(nloop>=2){document.location.href=document.location.href;}}
 		player.loadFile(song[id], player.start); // load MIDI
 		var title = document.getElementById("title");
 		title.innerHTML = songname[id];songid=id;
