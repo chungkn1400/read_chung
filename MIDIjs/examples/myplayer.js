@@ -6,6 +6,14 @@
 	----------------------------------------------------------
 */
 var mydelay=0.120;// added
+var isonfocus=true;
+var mytimeout=setTimeout("",100);  
+window.onblur = function(){  
+  isonfocus=false;  
+}  
+window.onfocus = function(){  
+  isonfocus=true;  
+}
 if (typeof MIDI === 'undefined') MIDI = {};
 if (typeof MIDI.Player === 'undefined') MIDI.Player = {};
 
@@ -26,6 +34,7 @@ midi.resume = function(onsuccess) {
     	midi.currentTime = -1;
     }
     startAudio(midi.currentTime, null, onsuccess);
+    setTimeout("setprog();",4000);
 };
 
 midi.pause = function() {
@@ -59,10 +68,11 @@ midi.setAnimation = function(callback) {
 	var tOurTime = 0;
 	var tTheirTime = 0;
 	//
-	midi.clearAnimation();
+	//midi.clearAnimation();
+	clearTimeout(mytimeout);
 	///
 	var frame = function() {
-		midi.animationFrameId = requestAnimationFrame(frame);
+		//midi.animationFrameId = requestAnimationFrame(frame);
 		///
 		if (midi.endTime === 0) {
 			return;
@@ -90,7 +100,7 @@ midi.setAnimation = function(callback) {
 		var t1 = minutes * 60 + seconds;
 		var t2 = (endTime / 1000);
 		///
-		if (t2 - t1 < -1.0) {
+		if ((t2 - t1)< -0.0) {
 			return;
 		} else {
 			callback({
@@ -99,9 +109,13 @@ midi.setAnimation = function(callback) {
 				events: noteRegistrar
 			});
 		}
+    //midi.animationFrameId = requestAnimationFrame(frame);
+    mytimeout=setTimeout(frame,100);
 	};
 	///
-	requestAnimationFrame(frame);
+    //window.cancelAnimationFrame();
+    setTimeout(frame,100);
+	//requestAnimationFrame(frame);
 };
 
 // helpers
