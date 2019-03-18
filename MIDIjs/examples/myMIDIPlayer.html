@@ -229,14 +229,17 @@ for(var i=0;i<=50;i++){
 			player.loadFile(song[id], player.start); // load MIDI
 				var title = document.getElementById("title");
 				title.innerHTML = songname[id];songid=id;
-				setTimeout("setprog();",5000);
+				//setTimeout("setprog();",5000);
 				combo.selectedIndex=songid;
 		};
-		player.setAnimation(function(data, element) {
+		
+
+		player.setAnimation(function(data) {
 			var percent = data.now / data.end;
-			var now = data.now >> 0; // where we are now
-			var end = data.end >> 0; // end of song
-			if (now >= (end-1)) { // go to next song
+			var now = data.now ; // where we are now
+			var end = data.end ; // end of song
+			var dt=1.0;//if(isonfocus==true){dt=1.0;}
+			if (now >= (end-dt)) { // go to next song
 			    if(tnextsong==0){mytestnextsong();};
 				//var id = ++songid % song.length;
 				//player.loadFile(song[id], player.start); // load MIDI
@@ -253,17 +256,20 @@ for(var i=0;i<=50;i++){
 	};
 	var tnextsong=0,now0=0,nloop=0;
 	function mytestnextsong(){
-	  if(tnextsong==0){tnextsong=1;setTimeout("mynextsong();",1000);}
+	  if(tnextsong==0){tnextsong=1;//player.stop();
+                       setTimeout("mynextsong();",1000);}
 	};
-    function mynextsong(){	
-	    var id = ++songid % song.length;
-		if(id==0){nloop=nloop+1;if(nloop>=2){document.location.href=document.location.href;}}
+    function mynextsong(){//alert("ok");	
+	    songid=songid+1;if(songid>=song.length){songid=0;}
+		var id = songid;// % song.length;
+		if(id==0){nloop=nloop+1;if(nloop>=4){document.location.href=document.location.href;}}
 		player.loadFile(song[id], player.start); // load MIDI
 		var title = document.getElementById("title");
-		title.innerHTML = songname[id];songid=id;
-		setTimeout("setprog();",5000);
+		title.innerHTML = songname[id];//songid=id;
 		combo.selectedIndex=songid;
 		tnextsong=0;
+		//setTimeout("setprog();",9000);
+		//title.innerHTML = songid;
 	};	
 	function setprog(){
 	 for(var canal=0;canal<16;canal++){MIDI.programChange(canal,0);};
