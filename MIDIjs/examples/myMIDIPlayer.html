@@ -234,7 +234,7 @@ for(var i=0;i<=50;i++){
 		};
 		
 
-		player.setAnimation(function(data) {
+		player.setAnimation(function(data,element) {
 			var percent = data.now / data.end;
 			var now = data.now ; // where we are now
 			var end = data.end ; // end of song
@@ -256,7 +256,7 @@ for(var i=0;i<=50;i++){
 	};
 	var tnextsong=0,now0=0,nloop=0;
 	function mytestnextsong(){
-	  if(tnextsong==0){tnextsong=1;//player.stop();
+	  if(tnextsong==0){tnextsong=1;player.stop();
                        setTimeout("mynextsong();",1000);}
 	};
     function mynextsong(){//alert("ok");	
