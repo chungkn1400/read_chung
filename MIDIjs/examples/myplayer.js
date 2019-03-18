@@ -114,7 +114,7 @@ midi.setAnimation = function(callback) {
 	};
 	///
     //window.cancelAnimationFrame();
-    setTimeout(frame,100);
+    mytimeout=setTimeout(frame,100);
 	//requestAnimationFrame(frame);
 };
 
